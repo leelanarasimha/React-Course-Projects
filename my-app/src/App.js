@@ -5,10 +5,11 @@ import HelloWorld from './components/HelloWorld/HelloWorld';
 function App() {
     return (
         <div className='container mx-auto'>
-            <Button />
-            <Button />
+            <Button name='First Button' text='dsdsds' />
+            <Button name='Second Button' />
 
-            <HelloWorld />
+            <HelloWorld text='Hello World Good Morning' />
+            <HelloWorld text='Hello World Welcome Leela Web Dev' />
         </div>
     );
 }
