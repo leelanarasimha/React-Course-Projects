@@ -11,21 +11,6 @@ class Posts extends Component {
         postTitle: 'Posts List',
     };
     render() {
-        setTimeout(() => {
-            console.log('Modifying');
-            const posts = [...this.state.posts];
-
-            posts[0].title = 'Modified Posts Data';
-            posts[1].title = 'Modified Posts 2 data';
-
-            this.setState({
-                posts,
-            });
-
-            this.setState({
-                postTitle: 'Modified Post Title',
-            });
-        }, 3000);
         return (
             <div>
                 <h2 className='text-2xl my-3'>{this.state.postTitle}</h2>
