@@ -1,5 +1,5 @@
-const { Component } = require('react');
-const { default: SinglePost } = require('../SinglePost/SinglePost');
+import { Component } from 'react';
+import SinglePost from '../SinglePost/SinglePost';
 
 class Posts extends Component {
     state = {
