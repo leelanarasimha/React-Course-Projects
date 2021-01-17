@@ -4,8 +4,21 @@ import SinglePost from '../SinglePost/SinglePost';
 class Posts extends Component {
     state = {
         posts: [
-            { title: 'post 1', description: 'post1 description 1' },
-            { title: 'post 2', description: 'post1 description 2' },
+            {
+                id: '1',
+                title: 'post 1',
+                description: 'post1 description 1',
+            },
+            {
+                id: '2',
+                title: 'post 2',
+                description: 'post1 description 2',
+            },
+            {
+                id: '3',
+                title: 'post 3',
+                description: 'post1 description 2',
+            },
         ],
 
         postTitle: 'Posts List',
@@ -21,16 +34,35 @@ class Posts extends Component {
 
     getPosts() {
         if (!this.state.showPosts) return null;
+
+        // let posts = this.state.posts.map((post) => (
+        //     <SinglePost
+        //         title={post.title}
+        //         description={post.description}
+        //     />
+        // ));
+
+        let posts = [];
+
+        for (let post of this.state.posts) {
+            posts.push(
+                <SinglePost
+                    title={post.title}
+                    description={post.description}
+                />,
+            );
+        }
         return (
             <div className='flex my-3'>
-                <SinglePost
-                    title={this.state.posts[0].title}
-                    description={this.state.posts[0].description}
-                />
-                <SinglePost
-                    title={this.state.posts[1].title}
-                    description={this.state.posts[1].description}
-                />
+                {this.state.posts.map((post, index) => {
+                    return (
+                        <SinglePost
+                            key={post.id}
+                            title={post.title}
+                            description={post.description}
+                        />
+                    );
+                })}
             </div>
         );
     }
@@ -67,7 +99,7 @@ class Posts extends Component {
                     </button>
                 </div>
                 <hr />
-                {posts}
+                {this.getPosts()}
             </div>
         );
     }
