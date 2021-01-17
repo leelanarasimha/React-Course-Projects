@@ -29,7 +29,7 @@ class AddPost extends Component {
                             type='text'
                             value={this.state.title}
                             onChange={this.textChange.bind(this, 'title')}
-                            className='px-3 py-1 block w-1/4 border border-gray-600  focus:outline-none focus:border-red-600'
+                            className='px-3 py-1 block w-full border border-gray-600  focus:outline-none focus:border-red-600'
                         />
                     </div>
                     <div className='my-3'>
@@ -40,7 +40,7 @@ class AddPost extends Component {
                                 this,
                                 'description',
                             )}
-                            className='px-3 py-1 block w-1/4 border border-gray-600  focus:outline-none focus:border-red-600'
+                            className='px-3 py-1 block w-full border border-gray-600  focus:outline-none focus:border-red-600'
                         ></textarea>
                     </div>
                     <div className='my-3'>
@@ -48,7 +48,7 @@ class AddPost extends Component {
                         <select
                             onChange={this.textChange.bind(this, 'status')}
                             value={this.state.active}
-                            className='px-3 py-1 block w-1/4 border border-gray-600  focus:outline-none focus:border-red-600'
+                            className='px-3 py-1 block w-full border border-gray-600  focus:outline-none focus:border-red-600'
                         >
                             <option value='active'>Active</option>
                             <option value='inactive'>InActive</option>

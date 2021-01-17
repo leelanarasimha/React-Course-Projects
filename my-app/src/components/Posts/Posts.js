@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import AddPost from '../AddPost/AddPost';
+import Dialog from '../Dialog/Dialog';
 import SinglePost from '../SinglePost/SinglePost';
 
 class Posts extends Component {
@@ -76,12 +77,21 @@ class Posts extends Component {
                         <SinglePost
                             key={post.id}
                             title={post.title}
-                            titleChange={this.onchangeTitleHandler.bind(
-                                this,
-                                post.id,
-                            )}
+                            addpost={<AddPost />}
                             description={post.description}
-                        />
+                        >
+                            <div className='my-2'>
+                                <input
+                                    type='text'
+                                    value={post.title}
+                                    onChange={this.onchangeTitleHandler.bind(
+                                        this,
+                                        post.id,
+                                    )}
+                                    className='px-5 py-1 rounded-xl border border-gray-500'
+                                />
+                            </div>
+                        </SinglePost>
                     );
                 })}
             </div>
@@ -122,8 +132,16 @@ class Posts extends Component {
                 <hr />
                 {this.getPosts()}
 
-                <div className='my-5'>
-                    <AddPost />
+                <div className='flex'>
+                    <div className='my-5 flex-1 w-full'>
+                        <AddPost />
+                    </div>
+
+                    <div className='flex-1'>
+                        <Dialog>
+                            <div>Showing the dialog data</div>
+                        </Dialog>
+                    </div>
                 </div>
             </div>
         );
