@@ -8,6 +8,14 @@ class SinglePost extends Component {
                     {this.props.title}
                 </h3>
                 <div>{this.props.description}</div>
+                <div className='my-2'>
+                    <input
+                        type='text'
+                        value={this.props.title}
+                        onChange={this.props.titleChange}
+                        className='px-5 py-1 rounded-xl border border-gray-500'
+                    />
+                </div>
             </div>
         );
     }

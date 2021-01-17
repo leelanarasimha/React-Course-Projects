@@ -33,6 +33,18 @@ class Posts extends Component {
         });
     };
 
+    onchangeTitleHandler = (id, e) => {
+        const postIndex = this.state.posts.findIndex(
+            (post) => post.id === id,
+        );
+        const posts = [...this.state.posts];
+        posts[postIndex].title = e.target.value;
+
+        this.setState({
+            posts,
+        });
+    };
+
     getPosts() {
         if (!this.state.showPosts) return null;
 
@@ -50,6 +62,10 @@ class Posts extends Component {
                 <SinglePost
                     title={post.title}
                     description={post.description}
+                    titleChange={this.onchangeTitleHandler.bind(
+                        this,
+                        post.id,
+                    )}
                 />,
             );
         }
@@ -60,6 +76,10 @@ class Posts extends Component {
                         <SinglePost
                             key={post.id}
                             title={post.title}
+                            titleChange={this.onchangeTitleHandler.bind(
+                                this,
+                                post.id,
+                            )}
                             description={post.description}
                         />
                     );
