@@ -4,29 +4,32 @@ import Dialog from '../Dialog/Dialog';
 import SinglePost from '../SinglePost/SinglePost';
 
 class Posts extends Component {
-    state = {
-        posts: [
-            {
-                id: '1',
-                title: 'post 1',
-                description: 'post1 description 1',
-            },
-            {
-                id: '2',
-                title: 'post 2',
-                description: 'post1 description 2',
-            },
-            {
-                id: '3',
-                title: 'post 3',
-                description: 'post1 description 2',
-            },
-        ],
+    constructor(props) {
+        super(props);
+        this.state = {
+            posts: [
+                {
+                    id: '1',
+                    title: 'post 1',
+                    description: 'post1 description 1',
+                },
+            ],
 
-        postTitle: 'Posts List',
-        showPosts: true,
-        count: false,
-    };
+            postTitle: 'Posts List',
+            showPosts: true,
+            count: false,
+        };
+        console.log('[posts.js] constructor called');
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[posts.js] get derived called');
+        return state;
+    }
+
+    componentDidMount() {
+        console.log('[posts.js] component did mount called');
+    }
 
     togglePostsHandler = () => {
         this.setState({
@@ -99,22 +102,23 @@ class Posts extends Component {
     }
 
     render() {
+        console.log('[posts.js] render called');
         let posts = null;
 
-        if (this.state.showPosts) {
-            posts = (
-                <div className='flex my-3'>
-                    <SinglePost
-                        title={this.state.posts[0].title}
-                        description={this.state.posts[0].description}
-                    />
-                    <SinglePost
-                        title={this.state.posts[1].title}
-                        description={this.state.posts[1].description}
-                    />
-                </div>
-            );
-        }
+        // if (this.state.showPosts) {
+        //     posts = (
+        //         <div className='flex my-3'>
+        //             <SinglePost
+        //                 title={this.state.posts[0].title}
+        //                 description={this.state.posts[0].description}
+        //             />
+        //             <SinglePost
+        //                 title={this.state.posts[1].title}
+        //                 description={this.state.posts[1].description}
+        //             />
+        //         </div>
+        //     );
+        // }
         return (
             <div>
                 <div>{this.state.count && 'show Count'}</div>
