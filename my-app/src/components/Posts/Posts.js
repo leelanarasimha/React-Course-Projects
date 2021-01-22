@@ -27,6 +27,11 @@ class Posts extends Component {
         return state;
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[posts.js] should component update fired');
+        return true;
+    }
+
     componentDidMount() {
         console.log('[posts.js] component did mount called');
     }
@@ -149,6 +154,15 @@ class Posts extends Component {
                 </div>
             </div>
         );
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('[posts.js] snapshot fired');
+        return null;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[posts.js] component did update fired');
     }
 }
 

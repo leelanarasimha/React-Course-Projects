@@ -10,6 +10,12 @@ class SinglePost extends Component {
     //     console.log('[single post] get derived called');
     //     return state;
     // }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[single post] should component update fired');
+        return true;
+    }
+
     render() {
         console.log('[single post] render called');
         return (
@@ -23,8 +29,22 @@ class SinglePost extends Component {
         );
     }
 
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('[single post] get snapshot fired');
+        return 10;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(snapshot);
+        console.log('[single post] component did update fired');
+    }
+
     componentDidMount() {
         console.log('[single post] component did mount called');
+    }
+
+    componentWillUnmount() {
+        console.log('[single post] component unmount called');
     }
 }
 
