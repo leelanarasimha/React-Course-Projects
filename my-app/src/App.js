@@ -2,6 +2,7 @@ import './App.css';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import Navigation from './components/Navigation/Navigation';
 import Posts from './components/Posts/Posts';
+import RefTextInput from './components/RefTextInput/RefTextInput';
 import Sidebar from './components/Sidebar/Sidebar';
 import ButtonContext from './Context/ButtonContext';
 import UserContext from './Context/UserContext';
@@ -26,7 +27,12 @@ function App() {
                     </ErrorBoundary>
                 </div>
                 <div className='w-4/5'>
-                    <Posts />
+                    <div>
+                        <RefTextInput />
+                    </div>
+                    <div>
+                        <Posts />
+                    </div>
                 </div>
             </div>
         </div>

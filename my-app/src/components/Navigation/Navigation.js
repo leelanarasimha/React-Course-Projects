@@ -14,7 +14,7 @@ export default class Navigation extends Component {
                                 <UserContext.Consumer>
                                     {(userValue) => {
                                         return (
-                                            <div>{userValue.gret()}</div>
+                                            <div>{userValue.greet()}</div>
                                         );
                                     }}
                                 </UserContext.Consumer>
