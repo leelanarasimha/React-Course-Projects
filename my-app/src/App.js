@@ -1,5 +1,6 @@
 import './App.css';
 import CallbackRefTextInput from './components/CallbackRefTextInput/CallbackRefTextInput';
+import ParentCallbackRefTextInput from './components/CallbackRefTextInput/ParentCallbackRefTextInput';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import Navigation from './components/Navigation/Navigation';
 import Posts from './components/Posts/Posts';
@@ -33,7 +34,7 @@ function App() {
                         <ParentRefTextInput />
                     </div>
                     <div>
-                        <CallbackRefTextInput />
+                        <ParentCallbackRefTextInput />
                     </div>
                     {/* <div>
                         <Posts />

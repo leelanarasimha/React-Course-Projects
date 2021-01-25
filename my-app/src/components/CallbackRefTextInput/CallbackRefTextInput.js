@@ -10,9 +10,9 @@ export default class CallbackRefTextInput extends Component {
     }
 
     componentDidMount() {
-        console.log(this.textInput);
-        this.textInput.focus();
-        this.textInput.value = 'Leela Web Dev';
+        // console.log(this.textInput);
+        // this.textInput.focus();
+        // this.textInput.value = 'Leela Web Dev';
     }
 
     render() {
@@ -22,7 +22,7 @@ export default class CallbackRefTextInput extends Component {
                 <input
                     type='text'
                     className='border border-gray-500'
-                    ref={this.inputRef}
+                    ref={this.props.inputRef}
                 />
             </div>
         );
