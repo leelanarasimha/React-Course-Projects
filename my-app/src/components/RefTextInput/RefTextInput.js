@@ -5,10 +5,10 @@ export default class RefTextInput extends Component {
         this.inputRef = React.createRef();
     }
 
-    focusInput = () => {
+    focusInput = (value) => {
         console.log(this.inputRef.current);
         this.inputRef.current.focus();
-        this.inputRef.current.value = 'Leela Web Dev';
+        this.inputRef.current.value = value;
     };
     render() {
         return (
@@ -25,7 +25,10 @@ export default class RefTextInput extends Component {
                 <div className='my-3'>
                     <button
                         className='bg-red-500 text-white px-2 py-1'
-                        onClick={this.focusInput}
+                        onClick={this.focusInput.bind(
+                            this,
+                            'calling from child',
+                        )}
                     >
                         Focus Input
                     </button>

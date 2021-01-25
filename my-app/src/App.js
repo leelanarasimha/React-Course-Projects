@@ -2,6 +2,7 @@ import './App.css';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import Navigation from './components/Navigation/Navigation';
 import Posts from './components/Posts/Posts';
+import ParentRefTextInput from './components/RefTextInput/ParentRefTextInput';
 import RefTextInput from './components/RefTextInput/RefTextInput';
 import Sidebar from './components/Sidebar/Sidebar';
 import ButtonContext from './Context/ButtonContext';
@@ -28,11 +29,11 @@ function App() {
                 </div>
                 <div className='w-4/5'>
                     <div>
-                        <RefTextInput />
+                        <ParentRefTextInput />
                     </div>
-                    <div>
+                    {/* <div>
                         <Posts />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
