@@ -2,6 +2,7 @@ import './App.css';
 import CallbackRefTextInput from './components/CallbackRefTextInput/CallbackRefTextInput';
 import ParentCallbackRefTextInput from './components/CallbackRefTextInput/ParentCallbackRefTextInput';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
+import ParentForwardingRef from './components/ForwardingRef/ParentForwardingRef';
 import Navigation from './components/Navigation/Navigation';
 import Posts from './components/Posts/Posts';
 import ParentRefTextInput from './components/RefTextInput/ParentRefTextInput';
@@ -30,6 +31,9 @@ function App() {
                     </ErrorBoundary>
                 </div>
                 <div className='w-4/5'>
+                    <div>
+                        <ParentForwardingRef />
+                    </div>
                     <div>
                         <ParentRefTextInput />
                     </div>
