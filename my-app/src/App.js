@@ -8,6 +8,7 @@ import Posts from './components/Posts/Posts';
 import ParentRefTextInput from './components/RefTextInput/ParentRefTextInput';
 import RefTextInput from './components/RefTextInput/RefTextInput';
 import Sidebar from './components/Sidebar/Sidebar';
+import TableFragment from './components/TableFragment/TableFragment';
 import ButtonContext from './Context/ButtonContext';
 import UserContext from './Context/UserContext';
 
@@ -31,6 +32,9 @@ function App() {
                     </ErrorBoundary>
                 </div>
                 <div className='w-4/5'>
+                    <div>
+                        <TableFragment />
+                    </div>
                     <div>
                         <ParentForwardingRef />
                     </div>
