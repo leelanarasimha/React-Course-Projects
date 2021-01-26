@@ -7,6 +7,7 @@ export default class ParentForwardingRef extends Component {
         this.buttonRef = React.createRef();
     }
     componentDidMount() {
+        console.log(this.buttonRef);
         this.buttonRef.current.innerHTML = 'Leela Web Dev';
     }
     render() {
