@@ -37,9 +37,9 @@ function App() {
                         </ErrorBoundary>
                     </div>
                     <div className='w-4/5'>
-                        {/* <div>
+                        <div>
                             <UserPropTypes />
-                        </div> */}
+                        </div>
                         <div>
                             <TableFragment />
                         </div>
@@ -58,9 +58,9 @@ function App() {
                     </div>
                 </div>
             </div>
-            <div className='container mx-auto'>
+            {/* <div className='container mx-auto'>
                 <Cat />
-            </div>
+            </div> */}
         </div>
     );
 }
