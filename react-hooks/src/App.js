@@ -7,7 +7,15 @@ function App() {
     const [showCounter, setShowCounter] = useState(true);
     return (
         <div className='container mx-auto'>
-            <Counter />
+            <div>
+                <button
+                    className='bg-green-600 text-white px-3 py-1'
+                    onClick={() => setShowCounter(!showCounter)}
+                >
+                    Toggle component
+                </button>
+            </div>
+            {showCounter && <Counter />}
         </div>
     );
 }
