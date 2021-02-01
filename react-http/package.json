@@ -1,5 +1,5 @@
 {
-    "name": "react-hooks",
+    "name": "react-http",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -9,7 +9,6 @@
         "@testing-library/react": "^11.2.3",
         "@testing-library/user-event": "^12.6.2",
         "autoprefixer": "^9.8.6",
-        "axios": "^0.21.1",
         "postcss": "^7.0.35",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
