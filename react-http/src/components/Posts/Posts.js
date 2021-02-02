@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Post } from '../Post/Post';
 import axios from 'axios';
 import SinglePostDetails from '../SinglePostDetails/SinglePostDetails';
+import { FunctionalSinglePostDetails } from '../FunctionalSinglePostDetails/FunctionalSinglePostDetails';
 
 export default class Posts extends Component {
     constructor(props) {
@@ -62,7 +63,7 @@ export default class Posts extends Component {
                             <h2 className='font-bold text-2xl'>
                                 Post details
                             </h2>
-                            <SinglePostDetails
+                            <FunctionalSinglePostDetails
                                 id={this.state.selectedPostId}
                             />
                         </div>
