@@ -3,6 +3,7 @@ import { Post } from '../Post/Post';
 import axios from 'axios';
 import SinglePostDetails from '../SinglePostDetails/SinglePostDetails';
 import { FunctionalSinglePostDetails } from '../FunctionalSinglePostDetails/FunctionalSinglePostDetails';
+import { AddPost } from '../AddPost/AddPost';
 
 export default class Posts extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class Posts extends Component {
         this.state = {
             posts: [],
             selectedPostId: null,
+            isAddPost: false,
         };
     }
 
@@ -36,6 +38,12 @@ export default class Posts extends Component {
         });
     };
 
+    onAddPostHandler = () => {
+        this.setState({
+            isAddPost: true,
+        });
+    };
+
     render() {
         const posts = this.state.posts.map((post) => {
             return (
@@ -53,9 +61,18 @@ export default class Posts extends Component {
             <div>
                 <div className='flex'>
                     <div className='w-3/4'>
-                        <h1 className='font-bold text-xl my-3'>
-                            Posts Data
-                        </h1>
+                        <div className='flex items-center justify-between'>
+                            <h1 className='font-bold text-xl my-3'>
+                                Posts Data
+                            </h1>
+                            <a
+                                href='#'
+                                onClick={this.onAddPostHandler}
+                                className='bg-blue-600 px-2 py-1 text-white'
+                            >
+                                Create Post
+                            </a>
+                        </div>
                         <div className='flex mx-2'>{posts}</div>
                     </div>
                     {this.state.selectedPostId && (
@@ -69,6 +86,11 @@ export default class Posts extends Component {
                         </div>
                     )}
                 </div>
+                {this.state.isAddPost && (
+                    <div className='my-3'>
+                        <AddPost />
+                    </div>
+                )}
             </div>
         );
     }
