@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 export function AddPost(props) {
@@ -6,8 +7,19 @@ export function AddPost(props) {
 
     function onCreatePost(e) {
         e.preventDefault();
-        console.log(title);
-        console.log(description);
+        const postData = {
+            title,
+            description,
+        };
+
+        axios
+            .post(
+                `https://react-course-b798e-default-rtdb.firebaseio.com/posts.json`,
+                postData,
+            )
+            .then((response) => {
+                props.onPostAdded();
+            });
     }
 
     return (

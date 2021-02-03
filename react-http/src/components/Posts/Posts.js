@@ -16,6 +16,13 @@ export default class Posts extends Component {
     }
 
     componentDidMount() {
+        this.getPosts();
+    }
+
+    getPosts = () => {
+        this.setState({
+            isAddPost: false,
+        });
         axios
             .get(
                 `https://react-course-b798e-default-rtdb.firebaseio.com/posts.json`,
@@ -30,7 +37,7 @@ export default class Posts extends Component {
                     posts: posts,
                 });
             });
-    }
+    };
 
     onPostClickHandler = (id) => {
         this.setState({
@@ -60,7 +67,7 @@ export default class Posts extends Component {
         return (
             <div>
                 <div className='flex'>
-                    <div className='w-3/4'>
+                    <div className='w-3/4 mr-4'>
                         <div className='flex items-center justify-between'>
                             <h1 className='font-bold text-xl my-3'>
                                 Posts Data
@@ -73,7 +80,7 @@ export default class Posts extends Component {
                                 Create Post
                             </a>
                         </div>
-                        <div className='flex mx-2'>{posts}</div>
+                        <div className='flex flex-wrap mx-2'>{posts}</div>
                     </div>
                     {this.state.selectedPostId && (
                         <div className='w-1/4'>
@@ -88,7 +95,7 @@ export default class Posts extends Component {
                 </div>
                 {this.state.isAddPost && (
                     <div className='my-3'>
-                        <AddPost />
+                        <AddPost onPostAdded={this.getPosts} />
                     </div>
                 )}
             </div>
