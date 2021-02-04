@@ -51,6 +51,20 @@ export default class Posts extends Component {
         });
     };
 
+    onPostDeleteHandler = (id, e) => {
+        e.stopPropagation();
+
+        if (window.confirm('Are you sure you want to delete')) {
+            axios
+                .delete(
+                    `https://react-course-b798e-default-rtdb.firebaseio.com/posts/${id}.json`,
+                )
+                .then((response) => {
+                    this.getPosts();
+                });
+        }
+    };
+
     render() {
         const posts = this.state.posts.map((post) => {
             return (
@@ -58,6 +72,10 @@ export default class Posts extends Component {
                     key={post.id}
                     post={post}
                     postclicked={this.onPostClickHandler.bind(
+                        this,
+                        post.id,
+                    )}
+                    postDeleted={this.onPostDeleteHandler.bind(
                         this,
                         post.id,
                     )}

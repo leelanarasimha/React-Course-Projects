@@ -8,6 +8,14 @@ export function Post(props) {
             <div>Id: {props.post.id}</div>
             <div>Title: {props.post.title}</div>
             <div>Description: {props.post.description}</div>
+            <div className='text-right'>
+                <button
+                    onClick={props.postDeleted}
+                    className='bg-red-400 text-white px-2 py-1'
+                >
+                    Delete Post
+                </button>
+            </div>
         </a>
     );
 }
