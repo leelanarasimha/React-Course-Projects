@@ -11,8 +11,15 @@ function App() {
             <div className='container mx-auto'>
                 <Header />
                 <div>
-                    <Route path='/' exact component={Home} />
-                    <Route path='/about' component={About} />
+                    <Route
+                        path='/'
+                        exact
+                        render={(props) => <Home {...props} />}
+                    />
+
+                    <Route path='/about'>
+                        <About />
+                    </Route>
                 </div>
                 <Footer />
             </div>
