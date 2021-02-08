@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { Post } from '../Post/Post';
-import axios from 'axios';
-import SinglePostDetails from '../SinglePostDetails/SinglePostDetails';
+import axios from './../../axiosinstance';
 import { FunctionalSinglePostDetails } from '../FunctionalSinglePostDetails/FunctionalSinglePostDetails';
 import { AddPost } from '../AddPost/AddPost';
 
@@ -23,20 +22,16 @@ export default class Posts extends Component {
         this.setState({
             isAddPost: false,
         });
-        axios
-            .get(
-                `https://react-course-b798e-default-rtdb.firebaseio.com/posts.json`,
-            )
-            .then((response) => {
-                const posts = [];
-                for (let key in response.data) {
-                    posts.push({ ...response.data[key], id: key });
-                }
+        axios.get(`/posts.json`).then((response) => {
+            const posts = [];
+            for (let key in response.data) {
+                posts.push({ ...response.data[key], id: key });
+            }
 
-                this.setState({
-                    posts: posts,
-                });
+            this.setState({
+                posts: posts,
             });
+        });
     };
 
     onPostClickHandler = (id) => {
@@ -55,13 +50,9 @@ export default class Posts extends Component {
         e.stopPropagation();
 
         if (window.confirm('Are you sure you want to delete')) {
-            axios
-                .delete(
-                    `https://react-course-b798e-default-rtdb.firebaseio.com/posts/${id}.json`,
-                )
-                .then((response) => {
-                    this.getPosts();
-                });
+            axios.delete(`/posts/${id}.json`).then((response) => {
+                this.getPosts();
+            });
         }
     };
 

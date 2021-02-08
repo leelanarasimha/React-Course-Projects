@@ -13,13 +13,9 @@ export function FunctionalSinglePostDetails(props) {
     });
 
     function getPostDetails() {
-        axios
-            .get(
-                `https://react-course-b798e-default-rtdb.firebaseio.com/posts/${props.id}.json`,
-            )
-            .then((response) => {
-                setPost({ ...response.data, id: props.id });
-            });
+        axios.get(`/posts/${props.id}.json`).then((response) => {
+            setPost({ ...response.data, id: props.id });
+        });
     }
 
     if (post) {

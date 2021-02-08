@@ -5,6 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
+axios.defaults.baseURL =
+    'https://react-course-b798e-default-rtdb.firebaseio.com/';
+// axios.defaults.headers.common['Authorization'] = 'Auth Token';
+
 axios.interceptors.request.use((request) => {
     console.log(request);
     request.headers.channelName = 'Leela Web Dev';

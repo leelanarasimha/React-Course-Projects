@@ -21,15 +21,11 @@ export default class SinglePostDetails extends Component {
     }
 
     getPostDetails = () => {
-        axios
-            .get(
-                `https://react-course-b798e-default-rtdb.firebaseio.com/posts/${this.props.id}.json`,
-            )
-            .then((response) => {
-                this.setState({
-                    post: { ...response.data, id: this.props.id },
-                });
+        axios.get(`/posts/${this.props.id}.json`).then((response) => {
+            this.setState({
+                post: { ...response.data, id: this.props.id },
             });
+        });
     };
 
     render() {
