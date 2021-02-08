@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, HashRouter } from 'react-router-dom';
 import { About } from './components/About/About';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
@@ -11,7 +11,7 @@ function App() {
             <div className='container mx-auto'>
                 <Header />
                 <div>
-                    <Route path='/' component={Home} />
+                    <Route path='/' exact component={Home} />
                     <Route path='/about' component={About} />
                 </div>
                 <Footer />
