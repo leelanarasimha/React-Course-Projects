@@ -1,5 +1,10 @@
 import './App.css';
-import { BrowserRouter, Route, HashRouter } from 'react-router-dom';
+import {
+    BrowserRouter,
+    Route,
+    HashRouter,
+    Switch,
+} from 'react-router-dom';
 import { About } from './components/About/About';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
@@ -12,14 +17,14 @@ function App() {
             <Header />
             <div className='container mx-auto'>
                 <div>
-                    <Route
-                        path='/'
-                        exact
-                        render={(props) => <Home {...props} />}
-                    />
-
-                    <Route path='/about' component={About} />
-                    <Route path='/contact' component={Contact} />
+                    <Switch>
+                        <Route path='/about' component={About} />
+                        <Route path='/contact' component={Contact} />
+                        <Route
+                            path='/'
+                            render={(props) => <Home {...props} />}
+                        />
+                    </Switch>
                 </div>
                 <Footer />
             </div>

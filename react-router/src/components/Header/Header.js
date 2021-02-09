@@ -3,7 +3,16 @@ export function Header(props) {
     return (
         <div className='flex justify-between bg-purple-400 px-3 py-1'>
             <div>
-                <Link to='/'>React Router</Link>
+                <Link
+                    to={{
+                        pathname: '/',
+                        hash: '#leelawebdev',
+                        search: '?channel=leelawebdev',
+                        state: { dashboard: true },
+                    }}
+                >
+                    React Router
+                </Link>
             </div>
             <div>
                 <ul className='flex'>
