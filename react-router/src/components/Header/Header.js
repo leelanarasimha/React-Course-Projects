@@ -34,6 +34,11 @@ export function Header(props) {
                             Contact
                         </NavLink>
                     </li>
+                    <li className='mr-2'>
+                        <NavLink to='/posts' activeClassName='text-white'>
+                            Posts
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>
