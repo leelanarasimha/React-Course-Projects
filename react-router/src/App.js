@@ -6,14 +6,21 @@ import {
     Switch,
     Redirect,
 } from 'react-router-dom';
-import { About } from './components/About/About';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
-import { Home } from './components/Home/Home';
-import { Contact } from './components/Contact/Contact';
-import { Posts } from './components/Posts/Posts';
-import SinglePost from './components/SinglePost/SinglePost';
-import { NotFound } from './components/NotFound/NotFound';
+import { lazy, Suspense } from 'react';
+
+const About = lazy(() =>
+    import(/* webpackChunkName: "About" */ './components/About/About'),
+);
+
+const Contact = lazy(() =>
+    import(
+        /* webpackChunkName: "Contact" */ './components/Contact/Contact'
+    ),
+);
+const Posts = lazy(() => import('./components/Posts/Posts'));
+const NotFound = lazy(() => import('./components/NotFound/NotFound'));
 
 function App() {
     let isAuthenticate = true;
@@ -22,17 +29,19 @@ function App() {
             <Header />
             <div className='container mx-auto'>
                 <div>
-                    <Switch>
-                        {isAuthenticate && (
-                            <Route path='/about' component={About} />
-                        )}
+                    <Suspense fallback={<div>Loading....</div>}>
+                        <Switch>
+                            {isAuthenticate && (
+                                <Route path='/about' component={About} />
+                            )}
 
-                        <Route path='/contact' component={Contact} />
-                        <Route path='/posts' component={Posts} />
+                            <Route path='/contact' component={Contact} />
+                            <Route path='/posts' component={Posts} />
 
-                        <Redirect from='/' to='/posts' exact />
-                        <Route path='*' component={NotFound} />
-                    </Switch>
+                            <Redirect from='/' to='/posts' exact />
+                            <Route path='*' component={NotFound} />
+                        </Switch>
+                    </Suspense>
                 </div>
                 <Footer />
             </div>
