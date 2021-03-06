@@ -34,7 +34,7 @@ function counterReducer(state = initialState, action) {
 }
 
 //create store
-const store = Redux.createStore(counterReducer);
+const store = createStore(counterReducer, { counter: 0 });
 
 function render() {
     const state = store.getState();
