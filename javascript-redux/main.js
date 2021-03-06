@@ -33,8 +33,10 @@ function counterReducer(state = initialState, action) {
     return state;
 }
 
+const enhancers = Redux.compose(newDispatch, newState);
+
 //create store
-const store = createStore(counterReducer, { counter: 0 });
+const store = Redux.createStore(counterReducer, { counter: 0 }, enhancers);
 
 function render() {
     const state = store.getState();
@@ -57,3 +59,30 @@ document
     .addEventListener('click', function () {
         store.dispatch(decrement());
     });
+
+function newDispatch(createStore) {
+    return function (reducer, preLoadedState, enhancers) {
+        let store = createStore(reducer, preLoadedState, enhancers);
+
+        function newDispatch(action) {
+            const result = store.dispatch(action);
+            console.log('Hello world, Perform LOgging');
+            return result;
+        }
+        return { ...store, dispatch: newDispatch };
+    };
+}
+
+function newState(createStore) {
+    return function (reducer, preLoadedState, enhancers) {
+        let store = createStore(reducer, preLoadedState, enhancers);
+
+        function newState() {
+            return {
+                ...store.getState(),
+                hai: 'Hello world',
+            };
+        }
+        return { ...store, getState: newState };
+    };
+}
