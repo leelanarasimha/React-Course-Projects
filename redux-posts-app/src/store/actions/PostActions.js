@@ -1,3 +1,5 @@
+import { formatPosts, getPosts } from '../../services/PostsService';
+
 export const CREATE_POST_ACTION = '[Post Action] Create Post';
 export const GET_POSTS = '[Post Action] Get Posts';
 export const CONFIRMED_GET_POSTS = '[Post Action] Confirmed Get Posts';
@@ -9,8 +11,11 @@ export function createPostAction() {
 }
 
 export function getPostsAction() {
-    return {
-        type: GET_POSTS,
+    return (dispatch, getState) => {
+        getPosts().then((response) => {
+            let posts = formatPosts(response.data);
+            dispatch(confirmedGetPostsAction(posts));
+        });
     };
 }
 
