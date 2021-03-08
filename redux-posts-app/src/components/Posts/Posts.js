@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import {
@@ -31,14 +32,16 @@ class Posts extends Component {
             );
         }
         return (
-            <div>
-                <h2 className='bolder text-lg'>Posts</h2>
-                <button
-                    className='bg-red-300 px-3 py-2'
-                    onClick={this.onCreatePost.bind(this)}
-                >
-                    Create Post
-                </button>
+            <div className='mt-4'>
+                <div className='flex items-center justify-between my-4'>
+                    <h2 className='bolder text-lg'>Posts</h2>
+                    <Link
+                        to='/createpost'
+                        className='bg-red-300 px-3 py-2'
+                    >
+                        Create Post
+                    </Link>
+                </div>
                 <hr />
                 <div className='flex'>{posts}</div>
             </div>
