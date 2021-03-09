@@ -6,6 +6,13 @@ export function getPosts() {
     );
 }
 
+export function createPost(postData) {
+    return axios.post(
+        `https://react-course-b798e-default-rtdb.firebaseio.com/posts.json`,
+        postData,
+    );
+}
+
 export function formatPosts(postsData) {
     let posts = [];
     for (let key in postsData) {
