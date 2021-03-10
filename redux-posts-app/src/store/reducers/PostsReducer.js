@@ -1,22 +1,11 @@
 import {
+    CONFIRMED_CREATE_POST_ACTION,
     CONFIRMED_GET_POSTS,
     CREATE_POST_ACTION,
 } from '../actions/PostActions';
 
 const initialState = {
-    posts: [
-        { id: 1, title: 'Post Title', description: 'Sample Description' },
-        {
-            id: 2,
-            title: 'Post Title 2',
-            description: 'Sample Description 2',
-        },
-        {
-            id: 3,
-            title: 'Post Title 2',
-            description: 'Sample Description 2',
-        },
-    ],
+    posts: [],
 };
 
 export default function PostsReducer(state = initialState, actions) {
@@ -29,6 +18,16 @@ export default function PostsReducer(state = initialState, actions) {
 
         const posts = [...state.posts];
         posts.push(post);
+        return {
+            ...state,
+            posts,
+        };
+    }
+
+    if (actions.type === CONFIRMED_CREATE_POST_ACTION) {
+        const posts = [...state.posts];
+        posts.push(actions.payload);
+
         return {
             ...state,
             posts,

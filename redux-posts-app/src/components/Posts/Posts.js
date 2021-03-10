@@ -14,7 +14,9 @@ class Posts extends Component {
     }
 
     componentDidMount() {
-        this.props.getPostsAction();
+        if (this.props.posts && !this.props.posts.length) {
+            this.props.getPostsAction();
+        }
     }
 
     render() {
