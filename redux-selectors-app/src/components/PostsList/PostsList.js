@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { incrementCount } from '../../store/actions/PostsActions';
+import { getActivePosts } from '../../store/selectors/PostSelectors';
 
 function PostsList(props) {
     return (
@@ -20,21 +21,9 @@ function PostsList(props) {
     );
 }
 
-const getActivePosts = (posts, filter) => {
-    debugger;
-    switch (filter) {
-        case 'SHOW_ACTIVE':
-            return posts.filter((post) => post.isActive);
-        case 'SHOW_INACTIVE':
-            return posts.filter((post) => !post.isActive);
-        default:
-            return posts;
-    }
-};
-
 const mapStateToProps = (state) => {
     return {
-        posts: getActivePosts(state.posts, state.filter),
+        posts: getActivePosts(state),
         count: state.count,
     };
 };
