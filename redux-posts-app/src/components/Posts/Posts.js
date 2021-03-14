@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import SinglePost from '../../pages/SinglePost/SinglePost';
 
 import {
     createPostAction,
@@ -24,12 +25,19 @@ class Posts extends Component {
 
         for (let post of this.props.posts) {
             posts.push(
-                <div
-                    key={post.id}
-                    className='shadow border p-3 mx-3 mt-3 w-1/3'
-                >
-                    <div>{post.title}</div>
-                    <div>{post.description}</div>
+                <div key={post.id} className=' mt-3 w-1/2'>
+                    <div className='shadow border p-3 mx-3'>
+                        <div>{post.title}</div>
+                        <div>{post.description}</div>
+                        <div>
+                            <Link
+                                to={{ pathname: `/posts/${post.id}` }}
+                                className='text-purple-500'
+                            >
+                                View Details
+                            </Link>
+                        </div>
+                    </div>
                 </div>,
             );
         }
@@ -45,7 +53,19 @@ class Posts extends Component {
                     </Link>
                 </div>
                 <hr />
-                <div className='flex'>{posts}</div>
+                <div className='flex'>
+                    <div className='flex-1'>
+                        <div className='flex flex-wrap'>{posts}</div>
+                    </div>
+                    <div className='flex-1'>
+                        {this.props.posts.length && (
+                            <Route
+                                path='/posts/:id'
+                                component={SinglePost}
+                            />
+                        )}
+                    </div>
+                </div>
             </div>
         );
     }
