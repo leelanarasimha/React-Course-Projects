@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import EditPost from '../../pages/EditPost/EditPost';
 import SinglePost from '../../pages/SinglePost/SinglePost';
 
 import {
@@ -37,6 +38,14 @@ class Posts extends Component {
                                 View Details
                             </Link>
                         </div>
+                        <div>
+                            <Link
+                                to={{ pathname: `/posts/edit/${post.id}` }}
+                                className='text-purple-500'
+                            >
+                                Edit Details
+                            </Link>
+                        </div>
                     </div>
                 </div>,
             );
@@ -59,10 +68,19 @@ class Posts extends Component {
                     </div>
                     <div className='flex-1'>
                         {this.props.posts.length && (
-                            <Route
-                                path='/posts/:id'
-                                component={SinglePost}
-                            />
+                            <div>
+                                <Switch>
+                                    <Route
+                                        path='/posts/:id'
+                                        exact
+                                        component={SinglePost}
+                                    />
+                                    <Route
+                                        path='/posts/edit/:id'
+                                        component={EditPost}
+                                    />
+                                </Switch>
+                            </div>
                         )}
                     </div>
                 </div>
