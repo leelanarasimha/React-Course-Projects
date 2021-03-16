@@ -20,6 +20,12 @@ export function updatePost(post, postId) {
     );
 }
 
+export function deletePost(postId) {
+    return axios.delete(
+        `https://react-course-b798e-default-rtdb.firebaseio.com/posts/${postId}.json`,
+    );
+}
+
 export function formatPosts(postsData) {
     let posts = [];
     for (let key in postsData) {

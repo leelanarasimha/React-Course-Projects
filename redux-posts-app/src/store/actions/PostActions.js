@@ -2,6 +2,7 @@ import {
     createPost,
     formatPosts,
     getPosts,
+    deletePost,
     updatePost,
 } from '../../services/PostsService';
 
@@ -13,6 +14,24 @@ export const CONFIRMED_GET_POSTS = '[Post Action] Confirmed Get Posts';
 export const EDIT_POST_ACTION = '[Post Action] Edit Post';
 export const CONFIRMED_EDIT_POST_ACTION =
     '[Post Action] Confirmed Edit Post';
+export const CONFIRMED_DELETE_POST_ACTION =
+    '[Post Action] Confirmed Delete Post';
+
+export function deletePostAction(postId, history) {
+    return (dispatch) => {
+        deletePost(postId).then((response) => {
+            dispatch(confirmedDeletePostAction(postId));
+            history.push('/posts');
+        });
+    };
+}
+
+export function confirmedDeletePostAction(postId) {
+    return {
+        type: CONFIRMED_DELETE_POST_ACTION,
+        payload: postId,
+    };
+}
 
 export function createPostAction(postData, history) {
     return (dispatch) => {

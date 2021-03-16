@@ -8,6 +8,7 @@ import SinglePost from '../../pages/SinglePost/SinglePost';
 import {
     createPostAction,
     getPostsAction,
+    deletePostAction,
 } from '../../store/actions/PostActions';
 
 class Posts extends Component {
@@ -18,6 +19,12 @@ class Posts extends Component {
     componentDidMount() {
         if (this.props.posts && !this.props.posts.length) {
             this.props.getPostsAction();
+        }
+    }
+
+    onDeletePost(postId) {
+        if (window.confirm('Are you sure you want to delete post?')) {
+            this.props.deletePostAction(postId, this.props.history);
         }
     }
 
@@ -45,6 +52,14 @@ class Posts extends Component {
                             >
                                 Edit Details
                             </Link>
+                        </div>
+                        <div>
+                            <button
+                                className='text-purple-500'
+                                onClick={() => this.onDeletePost(post.id)}
+                            >
+                                Delete Post
+                            </button>
                         </div>
                     </div>
                 </div>,
@@ -97,7 +112,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
-        { createPostAction, getPostsAction },
+        { createPostAction, getPostsAction, deletePostAction },
         dispatch,
     );
 };
