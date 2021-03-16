@@ -13,6 +13,9 @@ export default function Header(props) {
                     <Link to='/posts' className='px-2'>
                         Posts
                     </Link>
+                    <Link to='/signup' className='px-2'>
+                        SignUp
+                    </Link>
                 </div>
             </div>
         </div>

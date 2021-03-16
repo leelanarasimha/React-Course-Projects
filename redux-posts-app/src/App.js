@@ -5,6 +5,7 @@ import Posts from './components/Posts/Posts';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import createPost from './pages/CreatePost/CreatePost';
+import SignUp from './pages/SignUp/SignUp';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <div className='container px-3 mx-auto'>
                     <Switch>
                         <Route path='/posts' component={Posts} />
+                        <Route path='/signup' component={SignUp} />
                         <Route path='/createpost' component={createPost} />
                         <Route path='/' component={Home} />
                     </Switch>
