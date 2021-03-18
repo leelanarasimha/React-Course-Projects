@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signupAction } from '../../store/actions/AuthActions';
 
 function SignUp(props) {
     const [email, setEmail] = useState('');
     let errorsObj = { email: '', password: '' };
     const [errors, setErrors] = useState(errorsObj);
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
 
     function onSignUp(e) {
         e.preventDefault();
@@ -22,9 +26,9 @@ function SignUp(props) {
 
         setErrors(errorObj);
 
-        if (!error) {
-            console.log('form submit');
-        }
+        if (error) return;
+
+        dispatch(signupAction(email, password));
     }
 
     return (
