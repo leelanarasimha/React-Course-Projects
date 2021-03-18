@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { applyMiddleware, compose, createStore } from 'redux';
+import {
+    applyMiddleware,
+    combineReducers,
+    compose,
+    createStore,
+} from 'redux';
 import { confirmedGetPostsAction, GET_POSTS } from './actions/PostActions';
 import PostsReducer from './reducers/PostsReducer';
 import thunk from 'redux-thunk';
+import { AuthReducer } from './reducers/AuthReducer';
 
 const loggerMiddleware = (store) => (next) => (action) => {
     console.log('dispatching action', action);
@@ -28,7 +34,9 @@ const middleware = applyMiddleware(thunk);
 const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const store = createStore(
-    PostsReducer,
-    composeEnhancers(middleware),
-);
+const reducers = combineReducers({
+    posts: PostsReducer,
+    auth: AuthReducer,
+});
+
+export const store = createStore(reducers, composeEnhancers(middleware));
