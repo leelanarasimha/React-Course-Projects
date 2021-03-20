@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { signupAction } from '../../store/actions/AuthActions';
 
 function SignUp(props) {
@@ -35,6 +35,17 @@ function SignUp(props) {
         <div className='flex justify-center my-5'>
             <div className='w-1/3 shadow p-3 border border-gray-400'>
                 <h1 className='text-2xl font-extrabold'>Sign Up</h1>
+
+                {props.errorMessage && (
+                    <div className='bg-red-300 text-red-900 border border-red-900 p-1 my-2'>
+                        {props.errorMessage}
+                    </div>
+                )}
+                {props.successMessage && (
+                    <div className='bg-green-300 text-green-900 border border-green-900 p-1 my-2'>
+                        {props.successMessage}
+                    </div>
+                )}
 
                 <form onSubmit={onSignUp}>
                     <div>
@@ -78,4 +89,10 @@ function SignUp(props) {
     );
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+    return {
+        errorMessage: state.auth.errorMessage,
+        successMessage: state.auth.successMessage,
+    };
+};
+export default connect(mapStateToProps)(SignUp);

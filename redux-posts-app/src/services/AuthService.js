@@ -10,8 +10,17 @@ export function signUp(email, password) {
     };
 
     return axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=
-        AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
         postData,
     );
+}
+
+export function formatError(errorResponse) {
+    switch (errorResponse.error.message) {
+        case 'EMAIL_EXISTS':
+            return 'Email already exists';
+
+        default:
+            return '';
+    }
 }
