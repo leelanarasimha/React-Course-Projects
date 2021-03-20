@@ -1,4 +1,5 @@
 import {
+    LOADING_TOGGLE_ACTION,
     SIGNUP_CONFIRMED_ACTION,
     SIGNUP_FAILED_ACTION,
 } from '../actions/AuthActions';
@@ -13,6 +14,7 @@ const initialState = {
     },
     errorMessage: '',
     successMessage: '',
+    showLoading: false,
 };
 
 export function AuthReducer(state = initialState, action) {
@@ -22,6 +24,7 @@ export function AuthReducer(state = initialState, action) {
             auth: action.payload,
             errorMessage: '',
             successMessage: 'Signup Successfully Completed',
+            showLoading: false,
         };
     }
 
@@ -30,6 +33,14 @@ export function AuthReducer(state = initialState, action) {
             ...state,
             errorMessage: action.payload,
             successMessage: '',
+            showLoading: false,
+        };
+    }
+
+    if (action.type === LOADING_TOGGLE_ACTION) {
+        return {
+            ...state,
+            showLoading: action.payload,
         };
     }
     return state;

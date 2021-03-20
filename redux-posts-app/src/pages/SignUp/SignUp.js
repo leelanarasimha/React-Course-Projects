@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { signupAction } from '../../store/actions/AuthActions';
+import Loader from '../../components/Loader/Loader';
+import {
+    loadingToggleAction,
+    signupAction,
+} from '../../store/actions/AuthActions';
 
 function SignUp(props) {
     const [email, setEmail] = useState('');
@@ -27,12 +31,14 @@ function SignUp(props) {
         setErrors(errorObj);
 
         if (error) return;
+        dispatch(loadingToggleAction(true));
 
         dispatch(signupAction(email, password));
     }
 
     return (
         <div className='flex justify-center my-5'>
+            {props.showLoading && <Loader />}
             <div className='w-1/3 shadow p-3 border border-gray-400'>
                 <h1 className='text-2xl font-extrabold'>Sign Up</h1>
 
@@ -93,6 +99,7 @@ const mapStateToProps = (state) => {
     return {
         errorMessage: state.auth.errorMessage,
         successMessage: state.auth.successMessage,
+        showLoading: state.auth.showLoading,
     };
 };
 export default connect(mapStateToProps)(SignUp);
