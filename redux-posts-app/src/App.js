@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import createPost from './pages/CreatePost/CreatePost';
 import SignUp from './pages/SignUp/SignUp';
+import Login from './pages/Login/Login';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Switch>
                         <Route path='/posts' component={Posts} />
                         <Route path='/signup' component={SignUp} />
+                        <Route path='/login' component={Login} />
                         <Route path='/createpost' component={createPost} />
                         <Route path='/' component={Home} />
                     </Switch>
