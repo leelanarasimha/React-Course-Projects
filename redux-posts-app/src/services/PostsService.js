@@ -1,29 +1,19 @@
-import axios from 'axios';
+import axiosInstance from '../services/AxiosInstance';
 
-export function getPosts(token) {
-    return axios.get(
-        `https://react-course-b798e-default-rtdb.firebaseio.com/posts.json?auth=${token}`,
-    );
+export function getPosts() {
+    return axiosInstance.get(`posts.json`);
 }
 
-export function createPost(postData, token) {
-    return axios.post(
-        `https://react-course-b798e-default-rtdb.firebaseio.com/posts.json?auth=${token}`,
-        postData,
-    );
+export function createPost(postData) {
+    return axiosInstance.post(`posts.json`, postData);
 }
 
-export function updatePost(post, postId, token) {
-    return axios.put(
-        `https://react-course-b798e-default-rtdb.firebaseio.com/posts/${postId}.json?auth=${token}`,
-        post,
-    );
+export function updatePost(post, postId) {
+    return axiosInstance.put(`posts/${postId}.json`, post);
 }
 
-export function deletePost(postId, token) {
-    return axios.delete(
-        `https://react-course-b798e-default-rtdb.firebaseio.com/posts/${postId}.json?auth=${token}`,
-    );
+export function deletePost(postId) {
+    return axiosInstance.delete(`posts/${postId}.json`);
 }
 
 export function formatPosts(postsData) {

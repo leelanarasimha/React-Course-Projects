@@ -4,7 +4,7 @@ import {
     CONFIRMED_EDIT_POST_ACTION,
     CONFIRMED_GET_POSTS,
     CREATE_POST_ACTION,
-} from '../actions/PostActions';
+} from '../actions/PostTypes';
 
 const initialState = {
     posts: [],

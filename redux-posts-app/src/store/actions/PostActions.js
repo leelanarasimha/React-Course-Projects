@@ -5,23 +5,16 @@ import {
     deletePost,
     updatePost,
 } from '../../services/PostsService';
-
-export const CREATE_POST_ACTION = '[Post Action] Create Post';
-export const CONFIRMED_CREATE_POST_ACTION =
-    '[Post Action] Confirmed Create Post';
-export const GET_POSTS = '[Post Action] Get Posts';
-export const CONFIRMED_GET_POSTS = '[Post Action] Confirmed Get Posts';
-export const EDIT_POST_ACTION = '[Post Action] Edit Post';
-export const CONFIRMED_EDIT_POST_ACTION =
-    '[Post Action] Confirmed Edit Post';
-export const CONFIRMED_DELETE_POST_ACTION =
-    '[Post Action] Confirmed Delete Post';
+import {
+    CONFIRMED_CREATE_POST_ACTION,
+    CONFIRMED_DELETE_POST_ACTION,
+    CONFIRMED_EDIT_POST_ACTION,
+    CONFIRMED_GET_POSTS,
+} from './PostTypes';
 
 export function deletePostAction(postId, history) {
     return (dispatch, getState) => {
-        const state = getState();
-        const token = state.auth.auth.idToken;
-        deletePost(postId, token).then((response) => {
+        deletePost(postId).then((response) => {
             dispatch(confirmedDeletePostAction(postId));
             history.push('/posts');
         });
@@ -37,9 +30,7 @@ export function confirmedDeletePostAction(postId) {
 
 export function createPostAction(postData, history) {
     return (dispatch, getState) => {
-        const state = getState();
-        const token = state.auth.auth.idToken;
-        createPost(postData, token).then((response) => {
+        createPost(postData).then((response) => {
             const singlePost = {
                 ...postData,
                 id: response.data.name,
@@ -52,9 +43,7 @@ export function createPostAction(postData, history) {
 
 export function getPostsAction() {
     return (dispatch, getState) => {
-        const state = getState();
-        const token = state.auth.auth.idToken;
-        getPosts(token).then((response) => {
+        getPosts().then((response) => {
             let posts = formatPosts(response.data);
             dispatch(confirmedGetPostsAction(posts));
         });
@@ -84,9 +73,7 @@ export function confirmedUpdatePostAction(post) {
 
 export function updatePostAction(post, history) {
     return (dispatch, getState) => {
-        const state = getState();
-        const token = state.auth.auth.idToken;
-        updatePost(post, post.id, token).then((reponse) => {
+        updatePost(post, post.id).then((reponse) => {
             dispatch(confirmedUpdatePostAction(post));
             history.push('/posts');
         });
