@@ -2,6 +2,7 @@ import {
     LOADING_TOGGLE_ACTION,
     LOGIN_CONFIRMED_ACTION,
     LOGIN_FAILED_ACTION,
+    LOGOUT_ACTION,
     SIGNUP_CONFIRMED_ACTION,
     SIGNUP_FAILED_ACTION,
 } from '../actions/AuthActions';
@@ -36,6 +37,19 @@ export function AuthReducer(state = initialState, action) {
             errorMessage: '',
             successMessage: 'Login Successfully Completed',
             showLoading: false,
+        };
+    }
+
+    if (action.type === LOGOUT_ACTION) {
+        return {
+            ...state,
+            auth: {
+                email: '',
+                idToken: '',
+                localId: '',
+                expiresIn: '',
+                refreshToken: '',
+            },
         };
     }
 
