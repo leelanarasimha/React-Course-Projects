@@ -18,8 +18,10 @@ export const CONFIRMED_DELETE_POST_ACTION =
     '[Post Action] Confirmed Delete Post';
 
 export function deletePostAction(postId, history) {
-    return (dispatch) => {
-        deletePost(postId).then((response) => {
+    return (dispatch, getState) => {
+        const state = getState();
+        const token = state.auth.auth.idToken;
+        deletePost(postId, token).then((response) => {
             dispatch(confirmedDeletePostAction(postId));
             history.push('/posts');
         });
@@ -34,8 +36,10 @@ export function confirmedDeletePostAction(postId) {
 }
 
 export function createPostAction(postData, history) {
-    return (dispatch) => {
-        createPost(postData).then((response) => {
+    return (dispatch, getState) => {
+        const state = getState();
+        const token = state.auth.auth.idToken;
+        createPost(postData, token).then((response) => {
             const singlePost = {
                 ...postData,
                 id: response.data.name,
@@ -48,7 +52,9 @@ export function createPostAction(postData, history) {
 
 export function getPostsAction() {
     return (dispatch, getState) => {
-        getPosts().then((response) => {
+        const state = getState();
+        const token = state.auth.auth.idToken;
+        getPosts(token).then((response) => {
             let posts = formatPosts(response.data);
             dispatch(confirmedGetPostsAction(posts));
         });
@@ -77,8 +83,10 @@ export function confirmedUpdatePostAction(post) {
 }
 
 export function updatePostAction(post, history) {
-    return (dispatch) => {
-        updatePost(post, post.id).then((reponse) => {
+    return (dispatch, getState) => {
+        const state = getState();
+        const token = state.auth.auth.idToken;
+        updatePost(post, post.id, token).then((reponse) => {
             dispatch(confirmedUpdatePostAction(post));
             history.push('/posts');
         });
