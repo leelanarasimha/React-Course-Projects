@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { logout } from '../store/actions/AuthActions';
 
 export function signUp(email, password) {
     //axios call
@@ -43,4 +44,14 @@ export function formatError(errorResponse) {
         default:
             return '';
     }
+}
+
+export function saveTokenInLocalStorage(tokenDetails) {
+    localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
+}
+
+export function runLogoutTimer(dispatch, timer) {
+    setTimeout(() => {
+        dispatch(logout());
+    }, timer);
 }

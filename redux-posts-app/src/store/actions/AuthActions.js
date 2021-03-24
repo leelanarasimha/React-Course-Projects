@@ -1,4 +1,10 @@
-import { formatError, login, signUp } from '../../services/AuthService';
+import {
+    formatError,
+    login,
+    runLogoutTimer,
+    saveTokenInLocalStorage,
+    signUp,
+} from '../../services/AuthService';
 
 export const SIGNUP_CONFIRMED_ACTION = '[signup action] confirmed signup';
 export const SIGNUP_FAILED_ACTION = '[signup action] failed signup';
@@ -11,6 +17,8 @@ export function signupAction(email, password) {
     return (dispatch) => {
         signUp(email, password)
             .then((response) => {
+                saveTokenInLocalStorage(response.data);
+                runLogoutTimer(dispatch, response.data.expiresIn * 1000);
                 dispatch(confirmedSignupAction(response.data));
             })
             .catch((error) => {
@@ -21,6 +29,7 @@ export function signupAction(email, password) {
 }
 
 export function logout() {
+    localStorage.removeItem('userDetails');
     return {
         type: LOGOUT_ACTION,
     };
@@ -30,6 +39,8 @@ export function loginAction(email, password) {
     return (dispatch) => {
         login(email, password)
             .then((response) => {
+                saveTokenInLocalStorage(response.data);
+                runLogoutTimer(dispatch, response.data.expiresIn * 1000);
                 dispatch(loginConfirmedAction(response.data));
             })
             .catch((error) => {
