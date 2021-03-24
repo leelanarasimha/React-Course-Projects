@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { logout } from '../store/actions/AuthActions';
+import {
+    loginConfirmedAction,
+    logout,
+} from '../store/actions/AuthActions';
 
 export function signUp(email, password) {
     //axios call
@@ -47,6 +50,9 @@ export function formatError(errorResponse) {
 }
 
 export function saveTokenInLocalStorage(tokenDetails) {
+    tokenDetails.expireDate = new Date(
+        new Date().getTime() + tokenDetails.expiresIn * 1000,
+    );
     localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
 }
 
@@ -54,4 +60,26 @@ export function runLogoutTimer(dispatch, timer) {
     setTimeout(() => {
         dispatch(logout());
     }, timer);
+}
+
+export function checkAutoLogin(dispatch) {
+    const tokenDetailsString = localStorage.getItem('userDetails');
+    let tokenDetails = '';
+    if (!tokenDetailsString) {
+        dispatch(logout());
+        return;
+    }
+
+    tokenDetails = JSON.parse(tokenDetailsString);
+    let expireDate = new Date(tokenDetails.expireDate);
+    let todaysDate = new Date();
+
+    if (todaysDate > expireDate) {
+        dispatch(logout());
+        return;
+    }
+    dispatch(loginConfirmedAction(tokenDetails));
+
+    const timer = expireDate.getTime() - todaysDate.getTime();
+    runLogoutTimer(dispatch, timer);
 }

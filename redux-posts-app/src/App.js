@@ -7,8 +7,16 @@ import Home from './pages/Home/Home';
 import createPost from './pages/CreatePost/CreatePost';
 import SignUp from './pages/SignUp/SignUp';
 import Login from './pages/Login/Login';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { checkAutoLogin } from './services/AuthService';
 
 function App() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        checkAutoLogin(dispatch);
+    }, []);
+
     return (
         <BrowserRouter>
             <div>
