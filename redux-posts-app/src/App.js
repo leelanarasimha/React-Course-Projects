@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Posts from './components/Posts/Posts';
 import {
     BrowserRouter,
+    Redirect,
     Route,
     Switch,
     withRouter,
@@ -13,8 +14,9 @@ import createPost from './pages/CreatePost/CreatePost';
 import SignUp from './pages/SignUp/SignUp';
 import Login from './pages/Login/Login';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { checkAutoLogin } from './services/AuthService';
+import { isAuthenticated } from './store/selectors/AuthSelectors';
 
 function App(props) {
     const dispatch = useDispatch();
@@ -23,20 +25,37 @@ function App(props) {
         checkAutoLogin(dispatch, props.history);
     }, []);
 
+    let routes = (
+        <Switch>
+            <Route path='/signup' component={SignUp} />
+            <Route path='/login' component={Login} />
+            <Route path='/' component={Home} />
+        </Switch>
+    );
+
+    if (props.isAuthenticated) {
+        routes = (
+            <Switch>
+                <Route path='/posts' component={Posts} />
+                <Route path='/createpost' component={createPost} />
+                <Route path='/' component={Home} exact />
+                <Redirect to='/' />
+            </Switch>
+        );
+    }
+
     return (
         <div>
             <Header />
-            <div className='container px-3 mx-auto'>
-                <Switch>
-                    <Route path='/posts' component={Posts} />
-                    <Route path='/signup' component={SignUp} />
-                    <Route path='/login' component={Login} />
-                    <Route path='/createpost' component={createPost} />
-                    <Route path='/' component={Home} />
-                </Switch>
-            </div>
+            <div className='container px-3 mx-auto'>{routes}</div>
         </div>
     );
 }
 
-export default withRouter(App);
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: isAuthenticated(state),
+    };
+};
+
+export default withRouter(connect(mapStateToProps)(App));

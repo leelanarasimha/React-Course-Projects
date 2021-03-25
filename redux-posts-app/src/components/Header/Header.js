@@ -18,9 +18,6 @@ function Header(props) {
                     <Link to='/' className='px-2'>
                         Home
                     </Link>
-                    <Link to='/posts' className='px-2'>
-                        Posts
-                    </Link>
 
                     {!props.isAuthenticated && (
                         <>
@@ -34,9 +31,14 @@ function Header(props) {
                     )}
 
                     {props.isAuthenticated && (
-                        <button className='px-2' onClick={onLogout}>
-                            Logout
-                        </button>
+                        <>
+                            <Link to='/posts' className='px-2'>
+                                Posts
+                            </Link>
+                            <button className='px-2' onClick={onLogout}>
+                                Logout
+                            </button>
+                        </>
                     )}
                 </div>
             </div>
