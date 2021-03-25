@@ -1,5 +1,5 @@
 import { connect, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { logout } from '../../store/actions/AuthActions';
 import { isAuthenticated } from '../../store/selectors/AuthSelectors';
 
@@ -7,7 +7,7 @@ function Header(props) {
     const dispatch = useDispatch();
 
     function onLogout() {
-        dispatch(logout());
+        dispatch(logout(props.history));
     }
     return (
         <div>
@@ -50,4 +50,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));

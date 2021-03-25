@@ -33,7 +33,7 @@ function SignUp(props) {
         if (error) return;
         dispatch(loadingToggleAction(true));
 
-        dispatch(signupAction(email, password));
+        dispatch(signupAction(email, password, props.history));
     }
 
     return (

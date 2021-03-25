@@ -13,13 +13,18 @@ export const LOGIN_FAILED_ACTION = '[login action] failed login';
 export const LOADING_TOGGLE_ACTION = '[Loading action] toggle loading';
 export const LOGOUT_ACTION = '[Logout action] logout action';
 
-export function signupAction(email, password) {
+export function signupAction(email, password, history) {
     return (dispatch) => {
         signUp(email, password)
             .then((response) => {
                 saveTokenInLocalStorage(response.data);
-                runLogoutTimer(dispatch, response.data.expiresIn * 1000);
+                runLogoutTimer(
+                    dispatch,
+                    response.data.expiresIn * 1000,
+                    history,
+                );
                 dispatch(confirmedSignupAction(response.data));
+                history.push('/');
             })
             .catch((error) => {
                 const errorMessage = formatError(error.response.data);
@@ -28,20 +33,26 @@ export function signupAction(email, password) {
     };
 }
 
-export function logout() {
+export function logout(history) {
     localStorage.removeItem('userDetails');
+    history.push('/login');
     return {
         type: LOGOUT_ACTION,
     };
 }
 
-export function loginAction(email, password) {
+export function loginAction(email, password, history) {
     return (dispatch) => {
         login(email, password)
             .then((response) => {
                 saveTokenInLocalStorage(response.data);
-                runLogoutTimer(dispatch, response.data.expiresIn * 1000);
+                runLogoutTimer(
+                    dispatch,
+                    response.data.expiresIn * 1000,
+                    history,
+                );
                 dispatch(loginConfirmedAction(response.data));
+                history.push('/');
             })
             .catch((error) => {
                 const errorMessage = formatError(error.response.data);
