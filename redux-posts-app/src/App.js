@@ -1,22 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
-import Posts from './components/Posts/Posts';
-import {
-    BrowserRouter,
-    Redirect,
-    Route,
-    Switch,
-    withRouter,
-} from 'react-router-dom';
-import Home from './pages/Home/Home';
-import createPost from './pages/CreatePost/CreatePost';
-import SignUp from './pages/SignUp/SignUp';
-import Login from './pages/Login/Login';
-import { useEffect } from 'react';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { checkAutoLogin } from './services/AuthService';
 import { isAuthenticated } from './store/selectors/AuthSelectors';
+
+const Home = lazy(() => import('./pages/Home/Home'));
+const createPost = lazy(() => import('./pages/CreatePost/CreatePost'));
+const SignUp = lazy(() => import('./pages/SignUp/SignUp'));
+const Login = lazy(() => import('./pages/Login/Login'));
+const Posts = lazy(() => import('./components/Posts/Posts'));
 
 function App(props) {
     const dispatch = useDispatch();
@@ -47,7 +41,11 @@ function App(props) {
     return (
         <div>
             <Header />
-            <div className='container px-3 mx-auto'>{routes}</div>
+            <div className='container px-3 mx-auto'>
+                <Suspense fallback={<div>Loading...</div>}>
+                    {routes}
+                </Suspense>
+            </div>
         </div>
     );
 }
