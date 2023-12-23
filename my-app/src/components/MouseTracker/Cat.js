@@ -9,7 +9,7 @@ export default class Cat extends Component {
     render() {
         return (
             <MouseTracker
-                x={(mouse) => {
+                showCat={(mouse) => {
                     return (
                         <img
                             src='https://upload.wikimedia.org/wikipedia/commons/4/4d/Cat_March_2010-1.jpg'
